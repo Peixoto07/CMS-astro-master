@@ -1,0 +1,24 @@
+<body class="bg-gray-100 p-8">
+  <section x-data="{ currentIndex: 0, cards: ['Card 1', 'Card 2', 'Card 3'] }" class="max-w-md mx-auto">
+      <div class="overflow-hidden relative h-80">
+          <template x-for="(card, index) in cards" :key="index">
+              <div x-show="currentIndex === index" class="absolute inset-0 transition-transform transform duration-300" :class="{'-translate-y-full': currentIndex !== index}">
+                  <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col justify-between h-full">
+                      <div>
+                          <h2 class="text-2xl font-bold mb-4" x-text="card"></h2>
+                          <p class="text-gray-600">This is a description for <span x-text="card"></span>.</p>
+                      </div>
+                      <div class="mt-4">
+                          <button @click="currentIndex = (currentIndex + 1) % cards.length" class="bg-red-500 text-white px-4 py-2 rounded">Next</button>
+                      </div>
+                  </div>
+              </div>
+          </template>
+      </div>
+      <div class="mt-4 flex justify-center space-x-2">
+          <template x-for="(card, index) in cards" :key="index">
+              <button @click="currentIndex = index" :class="{'bg-red-500': currentIndex === index, 'bg-gray-300': currentIndex !== index}" class="w-3 h-3 rounded-full"></button>
+          </template>
+      </div>
+  </section>
+</body>
